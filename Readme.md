@@ -1,4 +1,4 @@
-## Data Validations
+## Data Validations [![Build Status](https://secure.travis-ci.org/dresende/node-enforce.png?branch=master)](http://travis-ci.org/dresende/node-enforce)
 
 This will be the package responsible for data validations in [ORM](http://dresende.github.io/node-orm2).
 
