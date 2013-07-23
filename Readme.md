@@ -23,6 +23,31 @@ checks.check({
 });
 ```
 
+You can pass some options in the constructor. One of them is `returnAllErrors` which makes the validations
+be all checked before returning errors. With this option, if any error is found, even if it's only one, it will be
+returned in an `Array`.
+
+```js
+var enforce = require("enforce");
+var checks  = new enforce.Enforce({
+	returnAllErrors : true
+});
+
+checks
+	.add("name", enforce.notEmptyString())
+	.add("name", enforce.ranges.length(2, undefined)) // yes, you can have multiple validators per property
+	.add("age", enforce.ranges.number(18, undefined, "under-age"));
+
+checks.check({
+	name : "J",
+	age  : 16
+}, function (err) {
+	console.log(err);
+	// [ { [Error: "out-of-range-length"], property: "name", value: "J" },
+	//   { [Error: "under-age"], property: "age", value: 16 }]
+});
+```
+
 ### Validators
 
 All validators accept a `msg` argument at the end. These argument is the error message returned if the
