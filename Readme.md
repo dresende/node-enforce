@@ -29,11 +29,11 @@ All validators accept a `msg` argument at the end. These argument is the error m
 validation fails. All validators return a `function` that is called by `Enforce` with the value of the property
 in question and a `next` callback.
 
-#### `enforce.required([ msg = "required" ])
+#### `enforce.required([ msg = "required" ])`
 
 Checks if a property is not `null` and not `undefined`. If can be `false`, `0` or `""`.
 
-#### `enforce.notEmptyString([ msg = "empty-string" ])
+#### `enforce.notEmptyString([ msg = "empty-string" ])`
 
 Checks if a property length is not zero. It can actually work with `Array`s.
 
@@ -45,11 +45,11 @@ Checks if the property is inside a list of items (the `Array`).
 
 Checks if the property is not inside a list of items (the `Array`).
 
-#### `enforce.ranges.number(min[, max[, msg = "out-of-range-number" ]])
+#### `enforce.ranges.number(min[, max[, msg = "out-of-range-number" ]])`
 
 Checks if a value is inside a specific range of numbers. Either `min` or `max` can be set to `undefined` meaning
 that range side is `Infinity`.
 
-#### `enforce.ranges.length(min[, max[, msg = "out-of-range-length" ]])
+#### `enforce.ranges.length(min[, max[, msg = "out-of-range-length" ]])`
 
 Does the same as the above but for the `length` property.
