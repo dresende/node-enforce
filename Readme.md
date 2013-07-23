@@ -53,3 +53,16 @@ that range side is `Infinity`.
 #### `enforce.ranges.length(min[, max[, msg = "out-of-range-length" ]])`
 
 Does the same as the above but for the `length` property.
+
+#### `enforce.security.password([ checks = "luns6", ]msg = "weak-password")`
+
+Checks if a value has some types of characters and a minimal length. `checks` has a default string which means:
+
+- `l`: lowercase letters
+- `u`: uppercase letters
+- `n`: numbers
+- `s`: special characters
+- `6`: minimal length of 6
+
+You can of course change this to "lu4" (lowercase, uppercase, minimal length of 4). Please note that if you pass only one argument
+to this validator, it will assume it's the `msg` argument. If you want to change the default checks, you have to pass both arguments.
