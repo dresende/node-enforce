@@ -1,0 +1,28 @@
+{
+	"author"      : "Diogo Resende <dresende@thinkdigital.pt>",
+	"name"        : "enforce",
+	"description" : "NodeJS data validations",
+	"keywords"    : [
+		"enforce",
+		"validation",
+		"manipulation"
+	],
+	"version"     : "0.0.1-alpha",
+	"license"     : "MIT",
+	"repository"  : "http://github.com/dresende/node-enforce.git",
+	"scripts"     : {
+		"test"      : "make"
+	},
+	"main"        : "./lib/Enforce",
+	"engines"     : {
+		"node"      : "*"
+	},
+	"analyse"     : false,
+	"dependencies": {
+		"lodash"    : "1.3.1"
+	},
+	"devDependencies": {
+		"mocha"   : "1.12.0",
+		"should"  : "1.2.2"
+	}
+}
