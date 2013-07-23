@@ -35,7 +35,7 @@ var checks  = new enforce.Enforce({
 
 checks
 	.add("name", enforce.notEmptyString())
-	.add("name", enforce.ranges.length(2, undefined)) // yes, you can have multiple validators per property
+	.add("name", enforce.ranges.length(2)) // yes, you can have multiple validators per property
 	.add("age", enforce.ranges.number(18, undefined, "under-age"));
 
 checks.check({
