@@ -18,10 +18,16 @@ describe("enforce.Enforce", function () {
 	});
 	it("should accept options as first argument", function (done) {
 		var checks = new enforce.Enforce({
-			myOption : 123
+			returnAllErrors : false
 		});
 
-		checks.options.myOption.should.equal(123);
+		checks.options.returnAllErrors.should.equal(false);
+
+		checks = new enforce.Enforce({
+			returnAllErrors : true
+		});
+
+		checks.options.returnAllErrors.should.equal(true);
 
 		return done();
 	});
