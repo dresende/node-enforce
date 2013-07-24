@@ -10,7 +10,7 @@ describe("enforce.security", function () {
 	});
 });
 
-describe("enforce.password()", function () {
+describe("enforce.security.password()", function () {
 	var validator = enforce.security.password();
 
 	it("should pass 'Passw0r∂'", function (done) {
@@ -30,7 +30,7 @@ describe("enforce.password()", function () {
 	});
 });
 
-describe("enforce.password('ln4')", function () {
+describe("enforce.security.password('ln4')", function () {
 	var validator = enforce.security.password('ln4', 'weak');
 
 	it("should pass 'Passw0r∂'", function (done) {
