@@ -91,3 +91,20 @@ Checks if a value has some types of characters and a minimal length. `checks` ha
 
 You can of course change this to "lu4" (lowercase, uppercase, minimal length of 4). Please note that if you pass only one argument
 to this validator, it will assume it's the `msg` argument. If you want to change the default checks, you have to pass both arguments.
+
+#### `enforce.patterns.match(pattern, modifiers[, msg = "no-pattern-match" ])
+
+Checks if property passes a specific regular expression. You can pass the `pattern` as a `RegExp` object (setting `modifiers` as `null`)
+or just pass a regular expression and it will be converted.
+
+#### `enforce.patterns.hexString([ msg = "not-hex-string" ])
+
+Checks if a property matches a predefined `RegExp` object accepting insensitive hexadecimal characters.
+
+#### `enforce.patterns.email([ msg = "not-valid-email" ])
+
+Checks if a property matches a predefined `RegExp` object accepting valid e-mail addresses.
+
+#### `enforce.patterns.ipv4([ msg = "not-valid-ipv4" ])
+
+Checks if a property matches a predefined `RegExp` object accepting valid IPv4 address.
