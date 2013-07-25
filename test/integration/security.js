@@ -53,3 +53,95 @@ describe("enforce.security.password('ln4')", function () {
 		validator('p12', common.checkValidation(done, 'weak'));
 	});
 });
+
+describe("enforce.security.creditcard()", function () {
+	var validator = enforce.security.creditcard();
+
+	it("should pass '4716025001543325' (VISA)", function (done) {
+		validator('4716025001543325', common.checkValidation(done));
+	});
+
+	it("should pass '6011484016942229' (Discover)", function (done) {
+		validator('6011484016942229', common.checkValidation(done));
+	});
+
+	it("should pass '5194162135294737' (Mastercard)", function (done) {
+		validator('5194162135294737', common.checkValidation(done));
+	});
+
+	it("should pass '6304709865953729' (Maestro)", function (done) {
+		validator('6304709865953729', common.checkValidation(done));
+	});
+
+	it("should pass '342106257219198' (American Express)", function (done) {
+		validator('342106257219198', common.checkValidation(done));
+	});
+
+	it("should not pass '342106257219199'", function (done) {
+		validator('342106257219199', common.checkValidation(done, 'not-valid-creditcard'));
+	});
+
+	it("should not pass '5194162135294734'", function (done) {
+		validator('5194162135294734', common.checkValidation(done, 'not-valid-creditcard'));
+	});
+
+	it("should not pass '6011484019642229'", function (done) {
+		validator('6011484019642229', common.checkValidation(done, 'not-valid-creditcard'));
+	});
+
+	it("should not pass '4917972403611992'", function (done) {
+		validator('4917972403611992', common.checkValidation(done, 'not-valid-creditcard'));
+	});
+});
+
+describe("enforce.security.creditcard([ 'amex' ], 'not-valid')", function () {
+	var validator = enforce.security.creditcard([ 'amex' ], 'not-valid');
+
+	it("should pass '342106257219198' (American Express)", function (done) {
+		validator('342106257219198', common.checkValidation(done));
+	});
+
+	it("should not pass '4716025001543325' (VISA) with 'not-valid'", function (done) {
+		validator('4716025001543325', common.checkValidation(done, 'not-valid'));
+	});
+});
+
+describe("enforce.security.creditcard([ 'visa' ], 'not-valid')", function () {
+	var validator = enforce.security.creditcard([ 'visa' ], 'not-valid');
+
+	it("should pass '4716025001543325' (VISA)", function (done) {
+		validator('4716025001543325', common.checkValidation(done));
+	});
+
+	it("should not pass '342106257219198' (American Express) with 'not-valid'", function (done) {
+		validator('342106257219198', common.checkValidation(done, 'not-valid'));
+	});
+});
+
+describe("enforce.security.creditcard([ 'maestro', 'discover' ], 'not-valid')", function () {
+	var validator = enforce.security.creditcard([ 'maestro', 'discover' ], 'not-valid');
+
+	it("should pass '5038328991436353' (Maestro)", function (done) {
+		validator('5038328991436353', common.checkValidation(done));
+	});
+
+	it("should pass '6011734449679115' (Discover)", function (done) {
+		validator('6011734449679115', common.checkValidation(done));
+	});
+
+	it("should not pass '4485227446136769' (VISA) with 'not-valid'", function (done) {
+		validator('4485227446136769', common.checkValidation(done, 'not-valid'));
+	});
+});
+
+describe("enforce.security.creditcard([ 'luhn' ], 'not-valid')", function () {
+	var validator = enforce.security.creditcard([ 'luhn' ], 'not-valid');
+
+	it("should pass '12344' (Luhn)", function (done) {
+		validator('12344', common.checkValidation(done));
+	});
+
+	it("should not pass '12345' with 'not-valid'", function (done) {
+		validator('12345', common.checkValidation(done, 'not-valid'));
+	});
+});

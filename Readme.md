@@ -79,7 +79,7 @@ that range side is `Infinity`.
 
 Does the same as the above but for the `length` property.
 
-#### `enforce.security.password([ checks = "luns6", ]msg = "weak-password")`
+#### `enforce.security.password([[ checks = "luns6", ]msg = "weak-password" ])`
 
 Checks if a value has some types of characters and a minimal length. `checks` has a default string which means:
 
@@ -91,6 +91,12 @@ Checks if a value has some types of characters and a minimal length. `checks` ha
 
 You can of course change this to "lu4" (lowercase, uppercase, minimal length of 4). Please note that if you pass only one argument
 to this validator, it will assume it's the `msg` argument. If you want to change the default checks, you have to pass both arguments.
+
+#### `enforce.security.creditcard([[ types = [ "amex", "visa", "maestro", "discover", "mastercard" ], ] msg = "not-valid-creditcard" ])`
+
+Checks if a value is a valid credit card number. It supports `amex` (American Express), `visa`, `maestro`, `discover` and `mastercard`.
+You can change the list of supported cards by passing a list with only some of them. You can also pass `luhn` which will ignore card
+prefixes and lenght and only pass the number using the Luhn algorithm.
 
 #### `enforce.patterns.match(pattern, modifiers[, msg = "no-pattern-match" ])`
 
