@@ -2,7 +2,7 @@
 
 This is the package responsible for data validations in [ORM](http://dresende.github.io/node-orm2).
 
-### Enforce
+## Enforce
 
 You can create a list of validations for several properties of an `Object` and then run the checks to
 see if everything is OK.
@@ -48,40 +48,62 @@ checks.check({
 });
 ```
 
-### Validators
+## Validators
 
 All validators accept a `msg` argument at the end. These argument is the error message returned if the
 validation fails. All validators return a `function` that is called by `Enforce` with the value of the property
 in question and a `next` callback.
 
-#### `enforce.required([ msg = "required" ])`
+### Required
+
+`enforce.required([ msg ])`
 
 Checks if a property is not `null` and not `undefined`. If can be `false`, `0` or `""`.
 
-#### `enforce.notEmptyString([ msg = "empty-string" ])`
+### Empty string
+
+`enforce.notEmptyString([ msg ])`
 
 Checks if a property length is not zero. It can actually work with `Array`s.
 
-#### `enforce.lists.inside(Array[, msg = "outside-list" ])`
+### Lists
 
-Checks if the property is inside a list of items (the `Array`).
+#### Inside a list
 
-#### `enforce.lists.outside(Array[, msg = "inside-list" ])`
+`enforce.lists.inside(list[, msg ])`
 
-Checks if the property is not inside a list of items (the `Array`).
+Checks if the property is inside a list of items.
 
-#### `enforce.ranges.number(min[, max[, msg = "out-of-range-number" ]])`
+#### Outside a list
+
+`enforce.lists.outside(list[, msg ])`
+
+Checks if the property is not inside a list of items.
+
+### Ranges
+
+#### In a number range
+
+`enforce.ranges.number(min[, max[, msg ]])`
 
 Checks if a value is inside a specific range of numbers. Either `min` or `max` can be set to `undefined` meaning
 that range side is `Infinity`.
 
-#### `enforce.ranges.length(min[, max[, msg = "out-of-range-length" ]])`
+Please note that this does not check for the type of value passed, you can even use this with `Date` objects.
+
+#### In a length range
+
+`enforce.ranges.length(min[, max[, msg ]])`
 
 Does the same as the above but for the `length` property.
 
-#### `enforce.security.password([[ checks = "luns6", ]msg = "weak-password" ])`
+### Security
 
-Checks if a value has some types of characters and a minimal length. `checks` has a default string which means:
+#### Password
+
+`enforce.security.password([[ checks, ]msg ])`
+
+Checks if a value has some types of characters and a minimal length. `checks` has a default string `luns6` which means:
 
 - `l`: lowercase letters
 - `u`: uppercase letters
@@ -92,25 +114,37 @@ Checks if a value has some types of characters and a minimal length. `checks` ha
 You can of course change this to "lu4" (lowercase, uppercase, minimal length of 4). Please note that if you pass only one argument
 to this validator, it will assume it's the `msg` argument. If you want to change the default checks, you have to pass both arguments.
 
-#### `enforce.security.creditcard([[ types = [ "amex", "visa", "maestro", "discover", "mastercard" ], ] msg = "not-valid-creditcard" ])`
+#### Credit Card
+
+`enforce.security.creditcard([[ types, ] msg ])`
 
 Checks if a value is a valid credit card number. It supports `amex` (American Express), `visa`, `maestro`, `discover` and `mastercard`.
-You can change the list of supported cards by passing a list with only some of them. You can also pass `luhn` which will ignore card
+You can change the list of supported cards (`types`) by passing a list with only some of them. You can also pass `luhn` which will ignore card
 prefixes and lenght and only pass the number using the Luhn algorithm.
 
-#### `enforce.patterns.match(pattern, modifiers[, msg = "no-pattern-match" ])`
+### Patterns
+
+#### Match
+
+`enforce.patterns.match(pattern, modifiers[, msg ])`
 
 Checks if property passes a specific regular expression. You can pass the `pattern` as a `RegExp` object (setting `modifiers` as `null`)
 or just pass a regular expression and it will be converted.
 
-#### `enforce.patterns.hexString([ msg = "not-hex-string" ])`
+#### Hex string
+
+`enforce.patterns.hexString([ msg ])`
 
 Checks if a property matches a predefined `RegExp` object accepting insensitive hexadecimal characters.
 
-#### `enforce.patterns.email([ msg = "not-valid-email" ])`
+#### E-mail
+
+`enforce.patterns.email([ msg ])`
 
 Checks if a property matches a predefined `RegExp` object accepting valid e-mail addresses.
 
-#### `enforce.patterns.ipv4([ msg = "not-valid-ipv4" ])`
+#### IPv4
+
+`enforce.patterns.ipv4([ msg ])`
 
 Checks if a property matches a predefined `RegExp` object accepting valid IPv4 address.
