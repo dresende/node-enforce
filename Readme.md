@@ -99,6 +99,15 @@ Does the same as the above but for the `length` property.
 
 ### Security
 
+#### Username
+
+`enforce.security.username([[ opts, ]msg ])`
+
+Checks if a value matches a username format. `opts` is also optional and is an object with the following keys:
+
+- `length`: the minimal length of the username (default = 2)
+- `expr`: the regular expression to be used to match a valid username (if not passed, it's built based on the minimal length)
+
 #### Password
 
 `enforce.security.password([[ checks, ]msg ])`
