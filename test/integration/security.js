@@ -30,6 +30,50 @@ describe("enforce.security.password()", function () {
 	});
 });
 
+describe("enforce.security.username()", function () {
+	var validator = enforce.security.username();
+
+	it("should pass 'a1'", function (done) {
+		validator('a1', common.checkValidation(done));
+	});
+
+	it("should pass 'A1'", function (done) {
+		validator('A1', common.checkValidation(done));
+	});
+
+	it("should pass '_A1'", function (done) {
+		validator('_A1', common.checkValidation(done));
+	});
+
+	it("should not pass 'a'", function (done) {
+		validator('a', common.checkValidation(done, 'invalid-username'));
+	});
+
+	describe("width custom error", function () {
+		var validator = enforce.security.username('custom-error');
+
+		it("should not pass 'a' with 'custom-error'", function (done) {
+			validator('a', common.checkValidation(done, 'custom-error'));
+		});
+	});
+});
+
+describe("enforce.security.username({ length: 5 })", function () {
+	var validator = enforce.security.username({ length: 5 });
+
+	it("should not pass 'a1'", function (done) {
+		validator('a1', common.checkValidation(done, 'invalid-username'));
+	});
+
+	it("should not pass 'abcd'", function (done) {
+		validator('abcd', common.checkValidation(done, 'invalid-username'));
+	});
+
+	it("should pass 'username'", function (done) {
+		validator('username', common.checkValidation(done));
+	});
+});
+
 describe("enforce.security.password('ln4')", function () {
 	var validator = enforce.security.password('ln4', 'weak');
 
