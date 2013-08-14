@@ -34,8 +34,6 @@ export function username(options: SecurityUsernameOptions = { length: 2, expr: n
         options.expr = new RegExp("^[a-z_][a-z0-9_\\-]{" + (options.length - 1) + ",}$", "i");
     }
 
-    console.info(JSON.stringify({ options: options, message: message }));
-
     return patterns.match(options.expr, message);
 }
 
