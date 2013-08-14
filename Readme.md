@@ -51,8 +51,10 @@ checks.check({
 ## Validators
 
 All validators accept a `msg` argument at the end. These argument is the error message returned if the
-validation fails. All validators return a `function` that is called by `Enforce` with the value of the property
-in question and a `next` callback.
+validation fails. All validators return a `Validator` object that is used by `Enforce` to support chaining
+and other functionality. `Validator` objects have a `validate` method which is called by `Enforce` with the 
+value of the property in question, a `next` callback and an optional global context table which may be used to
+pass information between validators.
 
 ### Required
 
@@ -157,3 +159,33 @@ Checks if a property matches a predefined `RegExp` object accepting valid e-mail
 `enforce.patterns.ipv4([ msg ])`
 
 Checks if a property matches a predefined `RegExp` object accepting valid IPv4 address.
+
+## Chaining
+`Enforce` supports chaining operations on all `Validator` objects, these allow you to add additional common
+conditions to each validation step. All chain operations return `Validator` objects, allowing you to chain
+multiple commands together with ease.
+
+#### ifDefined
+
+`validation.ifDefined()`
+
+Only proceedes to check the `validation` if the property's value is not `null` or `undefined`, passing validation
+if it is.
+
+#### ifNotEmptyString
+
+`validation.ifNotEmptyString()`
+
+Only proceedes to check the `validation` if the property's value is a `string` with a length greater than 0.
+
+#### ifType
+
+`validation.ifType(type)`
+
+Only proceedes to check the `validation` if the property's value is of the specified type. Checked with a `typeof value == type` operation.
+
+#### ifNotType
+
+`validation.ifNotType(type)`
+
+Only proceedes to check the `validation` if the property's value is not of the specified type. Checked with a `typeof value != type` operation.

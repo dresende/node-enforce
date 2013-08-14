@@ -13,40 +13,53 @@ describe("enforce", function () {
 
 		return done();
 	});
+	it("should have a chainable .ifDefined() function", function (done) {
+	    enforce.required().ifDefined.should.be.a("function");
+
+	    return done();
+	});
 });
 
 describe("enforce.required()", function () {
 	var validator = enforce.required();
 
 	it("should pass 1", function (done) {
-		validator(1, common.checkValidation(done));
+		validator.validate(1, common.checkValidation(done));
 	});
 
 	it("should pass 0", function (done) {
-		validator(0, common.checkValidation(done));
+		validator.validate(0, common.checkValidation(done));
 	});
 
 	it("should pass ''", function (done) {
-		validator('', common.checkValidation(done));
+		validator.validate('', common.checkValidation(done));
 	});
 
 	it("should pass false", function (done) {
-		validator(false, common.checkValidation(done));
+		validator.validate(false, common.checkValidation(done));
 	});
 
 	it("should not pass null", function (done) {
-		validator(null, common.checkValidation(done, 'required'));
+		validator.validate(null, common.checkValidation(done, 'required'));
 	});
 
 	it("should not pass undefined", function (done) {
-		validator(undefined, common.checkValidation(done, 'required'));
+		validator.validate(undefined, common.checkValidation(done, 'required'));
 	});
 
-	describe("width custom error", function () {
+	it("should pass null with .ifDefined()", function (done) {
+	    validator.ifDefined().validate(null, common.checkValidation(done));
+	});
+    
+	it("should pass undefined with .ifDefined()", function (done) {
+	    validator.ifDefined().validate(undefined, common.checkValidation(done));
+	});
+
+	describe("with custom error", function () {
 		var validator = enforce.required('custom-error');
 
 		it("should not pass null with 'custom-error'", function (done) {
-			validator(null, common.checkValidation(done, 'custom-error'));
+			validator.validate(null, common.checkValidation(done, 'custom-error'));
 		});
 	});
 });
@@ -55,22 +68,38 @@ describe("enforce.notEmptyString()", function () {
 	var validator = enforce.notEmptyString();
 
 	it("should pass 'hello'", function (done) {
-		validator('hello', common.checkValidation(done));
+		validator.validate('hello', common.checkValidation(done));
 	});
 
 	it("should pass ' '", function (done) {
-		validator(' ', common.checkValidation(done));
+		validator.validate(' ', common.checkValidation(done));
 	});
 
 	it("should not pass ''", function (done) {
-		validator('', common.checkValidation(done, 'empty-string'));
+		validator.validate('', common.checkValidation(done, 'empty-string'));
 	});
 
-	describe("width custom error", function () {
+	it("should not pass null", function (done) {
+	    validator.validate(null, common.checkValidation(done, 'undefined'));
+	});
+
+	it("should not pass undefined", function (done) {
+	    validator.validate(undefined, common.checkValidation(done, 'undefined'));
+	});
+
+	it("should pass null with .ifDefined()", function (done) {
+	    validator.ifDefined().validate(null, common.checkValidation(done));
+	});
+
+	it("should pass undefined with .ifDefined()", function (done) {
+	    validator.ifDefined().validate(undefined, common.checkValidation(done));
+	});
+
+	describe("with custom error", function () {
 		var validator = enforce.notEmptyString('custom-error');
 
 		it("should not pass '' with 'custom-error'", function (done) {
-			validator('', common.checkValidation(done, 'custom-error'));
+			validator.validate('', common.checkValidation(done, 'custom-error'));
 		});
 	});
 });

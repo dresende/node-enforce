@@ -14,18 +14,34 @@ describe("enforce.security.password()", function () {
 	var validator = enforce.security.password();
 
 	it("should pass 'Passw0r∂'", function (done) {
-		validator('Passw0r∂', common.checkValidation(done));
+		validator.validate('Passw0r∂', common.checkValidation(done));
 	});
 
 	it("should not pass 'password'", function (done) {
-		validator('password', common.checkValidation(done, 'weak-password'));
+		validator.validate('password', common.checkValidation(done, 'weak-password'));
 	});
 
-	describe("width custom error", function () {
+	it("should not pass null", function (done) {
+	    validator.validate(null, common.checkValidation(done, 'weak-password'));
+	});
+
+	it("should not pass undefined", function (done) {
+	    validator.validate(undefined, common.checkValidation(done, 'weak-password'));
+	});
+
+	it("should pass null with .ifDefined()", function (done) {
+	    validator.ifDefined().validate(null, common.checkValidation(done));
+	});
+
+	it("should pass undefined with .ifDefined()", function (done) {
+	    validator.ifDefined().validate(undefined, common.checkValidation(done));
+	});
+
+	describe("with custom error", function () {
 		var validator = enforce.security.password('custom-error');
 
 		it("should not pass 'password' with 'custom-error'", function (done) {
-			validator('password', common.checkValidation(done, 'custom-error'));
+			validator.validate('password', common.checkValidation(done, 'custom-error'));
 		});
 	});
 });
@@ -34,26 +50,42 @@ describe("enforce.security.username()", function () {
 	var validator = enforce.security.username();
 
 	it("should pass 'a1'", function (done) {
-		validator('a1', common.checkValidation(done));
+		validator.validate('a1', common.checkValidation(done));
 	});
 
 	it("should pass 'A1'", function (done) {
-		validator('A1', common.checkValidation(done));
+		validator.validate('A1', common.checkValidation(done));
 	});
 
 	it("should pass '_A1'", function (done) {
-		validator('_A1', common.checkValidation(done));
+		validator.validate('_A1', common.checkValidation(done));
 	});
 
 	it("should not pass 'a'", function (done) {
-		validator('a', common.checkValidation(done, 'invalid-username'));
+		validator.validate('a', common.checkValidation(done, 'invalid-username'));
 	});
 
-	describe("width custom error", function () {
+	it("should not pass null", function (done) {
+	    validator.validate(null, common.checkValidation(done, 'invalid-username'));
+	});
+
+	it("should not pass undefined", function (done) {
+	    validator.validate(undefined, common.checkValidation(done, 'invalid-username'));
+	});
+
+	it("should pass null with .ifDefined()", function (done) {
+	    validator.ifDefined().validate(null, common.checkValidation(done));
+	});
+
+	it("should pass undefined with .ifDefined()", function (done) {
+	    validator.ifDefined().validate(undefined, common.checkValidation(done));
+	});
+
+	describe("with custom error", function () {
 		var validator = enforce.security.username('custom-error');
 
 		it("should not pass 'a' with 'custom-error'", function (done) {
-			validator('a', common.checkValidation(done, 'custom-error'));
+			validator.validate('a', common.checkValidation(done, 'custom-error'));
 		});
 	});
 });
@@ -62,15 +94,31 @@ describe("enforce.security.username({ length: 5 })", function () {
 	var validator = enforce.security.username({ length: 5 });
 
 	it("should not pass 'a1'", function (done) {
-		validator('a1', common.checkValidation(done, 'invalid-username'));
+		validator.validate('a1', common.checkValidation(done, 'invalid-username'));
 	});
 
 	it("should not pass 'abcd'", function (done) {
-		validator('abcd', common.checkValidation(done, 'invalid-username'));
+		validator.validate('abcd', common.checkValidation(done, 'invalid-username'));
+	});
+
+	it("should not pass null", function (done) {
+	    validator.validate(null, common.checkValidation(done, 'invalid-username'));
+	});
+
+	it("should not pass undefined", function (done) {
+	    validator.validate(undefined, common.checkValidation(done, 'invalid-username'));
+	});
+
+	it("should pass null with .ifDefined()", function (done) {
+	    validator.ifDefined().validate(null, common.checkValidation(done));
+	});
+
+	it("should pass undefined with .ifDefined()", function (done) {
+	    validator.ifDefined().validate(undefined, common.checkValidation(done));
 	});
 
 	it("should pass 'username'", function (done) {
-		validator('username', common.checkValidation(done));
+		validator.validate('username', common.checkValidation(done));
 	});
 });
 
@@ -78,23 +126,39 @@ describe("enforce.security.password('ln4')", function () {
 	var validator = enforce.security.password('ln4', 'weak');
 
 	it("should pass 'Passw0r∂'", function (done) {
-		validator('Passw0r∂', common.checkValidation(done));
+		validator.validate('Passw0r∂', common.checkValidation(done));
 	});
 
 	it("should pass 'Passw0rd'", function (done) {
-		validator('Passw0rd', common.checkValidation(done));
+		validator.validate('Passw0rd', common.checkValidation(done));
 	});
 
 	it("should not pass 'P12345'", function (done) {
-		validator('P12345', common.checkValidation(done, 'weak'));
+	    validator.validate('P12345', common.checkValidation(done, 'weak'));
 	});
 
 	it("should not pass 'password'", function (done) {
-		validator('password', common.checkValidation(done, 'weak'));
+	    validator.validate('password', common.checkValidation(done, 'weak'));
 	});
 
 	it("should not pass 'p12'", function (done) {
-		validator('p12', common.checkValidation(done, 'weak'));
+	    validator.validate('p12', common.checkValidation(done, 'weak'));
+	});
+
+	it("should not pass null", function (done) {
+	    validator.validate(null, common.checkValidation(done, 'weak'));
+	});
+
+	it("should not pass undefined", function (done) {
+	    validator.validate(undefined, common.checkValidation(done, 'weak'));
+	});
+
+	it("should pass null with .ifDefined()", function (done) {
+	    validator.ifDefined().validate(null, common.checkValidation(done));
+	});
+
+	it("should pass undefined with .ifDefined()", function (done) {
+	    validator.ifDefined().validate(undefined, common.checkValidation(done));
 	});
 });
 
@@ -102,39 +166,55 @@ describe("enforce.security.creditcard()", function () {
 	var validator = enforce.security.creditcard();
 
 	it("should pass '4716025001543325' (VISA)", function (done) {
-		validator('4716025001543325', common.checkValidation(done));
+		validator.validate('4716025001543325', common.checkValidation(done));
 	});
 
 	it("should pass '6011484016942229' (Discover)", function (done) {
-		validator('6011484016942229', common.checkValidation(done));
+		validator.validate('6011484016942229', common.checkValidation(done));
 	});
 
 	it("should pass '5194162135294737' (Mastercard)", function (done) {
-		validator('5194162135294737', common.checkValidation(done));
+		validator.validate('5194162135294737', common.checkValidation(done));
 	});
 
 	it("should pass '6304709865953729' (Maestro)", function (done) {
-		validator('6304709865953729', common.checkValidation(done));
+		validator.validate('6304709865953729', common.checkValidation(done));
 	});
 
 	it("should pass '342106257219198' (American Express)", function (done) {
-		validator('342106257219198', common.checkValidation(done));
+		validator.validate('342106257219198', common.checkValidation(done));
 	});
 
 	it("should not pass '342106257219199'", function (done) {
-		validator('342106257219199', common.checkValidation(done, 'not-valid-creditcard'));
+		validator.validate('342106257219199', common.checkValidation(done, 'not-valid-creditcard'));
 	});
 
 	it("should not pass '5194162135294734'", function (done) {
-		validator('5194162135294734', common.checkValidation(done, 'not-valid-creditcard'));
+	    validator.validate('5194162135294734', common.checkValidation(done, 'not-valid-creditcard'));
 	});
 
 	it("should not pass '6011484019642229'", function (done) {
-		validator('6011484019642229', common.checkValidation(done, 'not-valid-creditcard'));
+	    validator.validate('6011484019642229', common.checkValidation(done, 'not-valid-creditcard'));
 	});
 
 	it("should not pass '4917972403611992'", function (done) {
-		validator('4917972403611992', common.checkValidation(done, 'not-valid-creditcard'));
+	    validator.validate('4917972403611992', common.checkValidation(done, 'not-valid-creditcard'));
+	});
+
+	it("should not pass null", function (done) {
+	    validator.validate(null, common.checkValidation(done, 'not-valid-creditcard'));
+	});
+
+	it("should not pass undefined", function (done) {
+	    validator.validate(undefined, common.checkValidation(done, 'not-valid-creditcard'));
+	});
+
+	it("should pass null with .ifDefined()", function (done) {
+	    validator.ifDefined().validate(null, common.checkValidation(done));
+	});
+
+	it("should pass undefined with .ifDefined()", function (done) {
+	    validator.ifDefined().validate(undefined, common.checkValidation(done));
 	});
 });
 
@@ -142,50 +222,50 @@ describe("enforce.security.creditcard([ 'amex' ], 'not-valid')", function () {
 	var validator = enforce.security.creditcard([ 'amex' ], 'not-valid');
 
 	it("should pass '342106257219198' (American Express)", function (done) {
-		validator('342106257219198', common.checkValidation(done));
+		validator.validate('342106257219198', common.checkValidation(done));
 	});
 
 	it("should not pass '4716025001543325' (VISA) with 'not-valid'", function (done) {
-		validator('4716025001543325', common.checkValidation(done, 'not-valid'));
+		validator.validate('4716025001543325', common.checkValidation(done, 'not-valid'));
 	});
 });
 
 describe("enforce.security.creditcard([ 'visa' ], 'not-valid')", function () {
-	var validator = enforce.security.creditcard([ 'visa' ], 'not-valid');
+    var validator = enforce.security.creditcard(['visa'], 'not-valid');
 
 	it("should pass '4716025001543325' (VISA)", function (done) {
-		validator('4716025001543325', common.checkValidation(done));
+		validator.validate('4716025001543325', common.checkValidation(done));
 	});
 
 	it("should not pass '342106257219198' (American Express) with 'not-valid'", function (done) {
-		validator('342106257219198', common.checkValidation(done, 'not-valid'));
+	    validator.validate('342106257219198', common.checkValidation(done, 'not-valid'));
 	});
 });
 
 describe("enforce.security.creditcard([ 'maestro', 'discover' ], 'not-valid')", function () {
-	var validator = enforce.security.creditcard([ 'maestro', 'discover' ], 'not-valid');
+    var validator = enforce.security.creditcard(['maestro', 'discover'], 'not-valid');
 
 	it("should pass '5038328991436353' (Maestro)", function (done) {
-		validator('5038328991436353', common.checkValidation(done));
+		validator.validate('5038328991436353', common.checkValidation(done));
 	});
 
 	it("should pass '6011734449679115' (Discover)", function (done) {
-		validator('6011734449679115', common.checkValidation(done));
+		validator.validate('6011734449679115', common.checkValidation(done));
 	});
 
 	it("should not pass '4485227446136769' (VISA) with 'not-valid'", function (done) {
-		validator('4485227446136769', common.checkValidation(done, 'not-valid'));
+	    validator.validate('4485227446136769', common.checkValidation(done, 'not-valid'));
 	});
 });
 
 describe("enforce.security.creditcard([ 'luhn' ], 'not-valid')", function () {
-	var validator = enforce.security.creditcard([ 'luhn' ], 'not-valid');
+    var validator = enforce.security.creditcard(['luhn'], 'not-valid');
 
 	it("should pass '12344' (Luhn)", function (done) {
-		validator('12344', common.checkValidation(done));
+		validator.validate('12344', common.checkValidation(done));
 	});
 
 	it("should not pass '12345' with 'not-valid'", function (done) {
-		validator('12345', common.checkValidation(done, 'not-valid'));
+	    validator.validate('12345', common.checkValidation(done, 'not-valid'));
 	});
 });

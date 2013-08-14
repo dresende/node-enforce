@@ -2,6 +2,9 @@
 	"author"      : "Diogo Resende <dresende@thinkdigital.pt>",
 	"name"        : "enforce",
 	"description" : "NodeJS data validations",
+	"contributors": [
+		{ "name": "Benjamin Pannell", "email": "contact@sierrasoftworks.com", "website": "https://sierrasoftworks.com" }
+	],
 	"keywords"    : [
 		"enforce",
 		"validation",
@@ -20,6 +23,7 @@
 	"analyse"     : false,
 	"devDependencies": {
 		"mocha"   : "1.12.0",
-		"should"  : "1.2.2"
+		"should"  : "1.2.2",
+		"typescript" : ">= 0.9.1"
 	}
 }
