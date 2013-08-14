@@ -47,16 +47,36 @@ describe("new enforce.Enforce()", function () {
 			}).should.throwError();
 
 			(function () {
-				checks.add("prop", function () {});
+				checks.add("prop", enforce.required());
 			}).should.not.throwError();
 
 			return done();
+		});
+
+		it("should allow adding a chained validator", function (done) {
+		    (function () {
+		        checks.add("prop", enforce.notEmptyString().ifDefined());
+		    }).should.not.throwError();
+
+		    return done();
+		});
+
+		it("should allow adding legacy validators (<= 0.1.2)", function (done) {
+		    (function () {
+		        checks.add("prop", function (value, next) { });
+		    }).should.not.throwError();
+
+		    (function () {
+		        checks.add("prop", function (value, next, contexts) { });
+		    }).should.not.throwError();
+
+		    return done();
 		});
 	});
 
 	describe(".clear", function () {
 		var checks = new enforce.Enforce();
-		checks.add("prop", function () {});
+		checks.add("prop", enforce.required());
 
 		it("should clear all validators", function (done) {
 			Object.keys(checks.validations).length.should.be.above(0);
@@ -96,7 +116,7 @@ describe("new enforce.Enforce()", function () {
 			}, function (err) {
 				should.exist(err);
 
-				err.msg.should.equal("first-error");
+				err[0].msg.should.equal("first-error");
 
 				return done();
 			});
