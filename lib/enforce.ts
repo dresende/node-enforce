@@ -1,7 +1,7 @@
 ﻿/// <reference path="enforce.d.ts" />
 /// <reference path="validator.ts" />
 
-import Validator = require('validator');
+import Validator = require('./validator');
 
 class Enforce {
     private validations: enforce.ValidatorMap = {};
@@ -51,7 +51,9 @@ class Enforce {
         this.validations = {};
     }
 
-    check(data: any, cb: (errors: Error[]) => void) {
+    check(data: any, cb: (error: Error) => void);
+    check(data: any, cb: (errors: Error[]) => void);
+    check(data: any, cb: (errors: any) => void) {
         var validations: {
             property: string;
             validator: enforce.IValidator;
@@ -60,7 +62,8 @@ class Enforce {
         var errors: Error[] = [];
         var next = () => {
             if (validations.length === 0) {
-                return cb(errors.length > 0 ? errors : null);
+                if (errors.length > 0) return cb(errors);
+                else return cb(null);
             }
 
             var validation = validations.shift();
@@ -75,7 +78,7 @@ class Enforce {
                         err.msg = message;
                         err.type = "validation";
 
-                        if (!this.options.returnAllErrors) return cb([err]);
+                        if (!this.options.returnAllErrors) return cb(err);
                         errors.push(err);
                     }
 

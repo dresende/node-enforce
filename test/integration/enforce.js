@@ -127,7 +127,7 @@ describe("new enforce.Enforce()", function () {
 			}, function (err) {
 				should.exist(err);
 
-				err[0].msg.should.equal("first-error");
+				err.msg.should.equal("first-error");
 
 				return done();
 			});

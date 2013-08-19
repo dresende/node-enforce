@@ -2,11 +2,13 @@
 
 declare module enforce {
     export interface IEnforce {
+        add(property: string, validator: ValidationCallback): IEnforce;
         add(property: string, validator: IValidator): IEnforce;
         context(): any;
         context(name: string): any;
         context(name: string, value: any): IEnforce;
         clear();
+        check(data: any, cb: (error: Error) => void);
         check(data: any, cb: (errors: Error[]) => void);
     }
 
