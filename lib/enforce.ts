@@ -15,9 +15,9 @@ class Enforce {
 
         return this;
     }
-    public add(property: string, validator: enforce.ValidationCallback): Enforce
-    public add(property: string, validator: enforce.IValidator): Enforce
-    public add(property: string, validator: any): Enforce {
+    add(property: string, validator: enforce.ValidationCallback): Enforce
+    add(property: string, validator: enforce.IValidator): Enforce
+    add(property: string, validator: any): Enforce {
         if (typeof validator === 'function' && validator.length >= 2) {
             validator = new Validator(validator);
         }

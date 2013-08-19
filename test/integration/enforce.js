@@ -35,7 +35,12 @@ describe("enforce.Enforce", function () {
 
 describe("new enforce.Enforce()", function () {
 	describe(".add", function () {
-		var checks = new enforce.Enforce();
+	    var checks = new enforce.Enforce();
+
+	    it("should have the .add() method", function (done) {
+	        checks.add.should.be.a('function');
+	        done();
+	    });
 
 		it("should throw if not passing a validator", function (done) {
 			(function () {
@@ -75,7 +80,13 @@ describe("new enforce.Enforce()", function () {
 	});
 
 	describe(".clear", function () {
-		var checks = new enforce.Enforce();
+	    var checks = new enforce.Enforce();
+
+	    it("should have a .clear() method", function (done) {
+	        checks.clear.should.be.a("function");
+	        done();
+	    });
+
 		checks.add("prop", enforce.required());
 
 		it("should clear all validators", function (done) {
