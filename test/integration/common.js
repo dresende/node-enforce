@@ -13,6 +13,11 @@ describe("enforce", function () {
 
 		return done();
 	});
+	it("should have .sameAs()", function (done) {
+		enforce.sameAs.should.be.a("function");
+
+		return done();
+	});
 	it("should have a chainable .ifDefined() function", function (done) {
 	    enforce.required().ifDefined.should.be.a("function");
 
@@ -50,7 +55,7 @@ describe("enforce.required()", function () {
 	it("should pass null with .ifDefined()", function (done) {
 	    validator.ifDefined().validate(null, common.checkValidation(done));
 	});
-    
+
 	it("should pass undefined with .ifDefined()", function (done) {
 	    validator.ifDefined().validate(undefined, common.checkValidation(done));
 	});
@@ -100,6 +105,34 @@ describe("enforce.notEmptyString()", function () {
 
 		it("should not pass '' with 'custom-error'", function (done) {
 			validator.validate('', common.checkValidation(done, 'custom-error'));
+		});
+	});
+});
+
+describe("enforce.sameAs()", function () {
+	var validator = enforce.sameAs('other');
+
+	it("should pass 'hello' === 'hello'", function (done) {
+		validator.validate('hello', common.checkValidation(done), { other: 'hello' });
+	});
+
+	it("should pass '' === ''", function (done) {
+		validator.validate('', common.checkValidation(done), { other: '' });
+	});
+
+	it("should not pass '' === 0", function (done) {
+		validator.validate('', common.checkValidation(done, 'not-same-as'), { other: 0 });
+	});
+
+	it("should not pass '' === undefined", function (done) {
+	    validator.validate('', common.checkValidation(done, 'not-same-as'), { other: undefined });
+	});
+
+	describe("with custom error", function () {
+		var validator = enforce.sameAs('other', 'custom-error');
+
+		it("should not pass 'hello' === '' with 'custom-error'", function (done) {
+			validator.validate('hello', common.checkValidation(done, 'custom-error'), { other: '' });
 		});
 	});
 });
