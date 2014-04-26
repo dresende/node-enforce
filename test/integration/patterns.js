@@ -24,7 +24,22 @@ describe("enforce.patterns", function () {
 		return done();
 	});
 	it("should have .ipv6()", function (done) {
-		enforce.patterns.ipv4.should.be.a("function");
+		enforce.patterns.ipv6.should.be.a("function");
+
+		return done();
+	});
+	it("should have .mac()", function (done) {
+		enforce.patterns.mac.should.be.a("function");
+
+		return done();
+	});
+	it("should have .uuid3()", function (done) {
+		enforce.patterns.uuid3.should.be.a("function");
+
+		return done();
+	});
+	it("should have .uuid4()", function (done) {
+		enforce.patterns.uuid4.should.be.a("function");
 
 		return done();
 	});
