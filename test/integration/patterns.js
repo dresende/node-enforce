@@ -234,3 +234,83 @@ describe("enforce.patterns.mac()", function () {
 		});
 	});
 });
+
+describe("enforce.patterns.uuid3()", function () {
+	var validator = enforce.patterns.uuid3();
+
+	it("should pass '6ba7b810-9dad-31d1-80b4-00c04fd430c8'", function (done) {
+		validator.validate('6ba7b810-9dad-31d1-80b4-00c04fd430c8', common.checkValidation(done));
+	});
+
+	it("should not pass '6ba7b810-9dad-11d1-80b4-00c04fd430c8'", function (done) {
+		validator.validate('6ba7b810-9dad-11d1-80b4-00c04fd430c8', common.checkValidation(done, 'not-valid-uuid3'));
+	});
+
+	it("should not pass '6ba7b810-9dad-31d1-70b4-00c04fd430c8'", function (done) {
+		validator.validate('6ba7b810-9dad-31d1-70b4-00c04fd430c8', common.checkValidation(done, 'not-valid-uuid3'));
+	});
+
+	it("should not pass null", function (done) {
+	    validator.validate(null, common.checkValidation(done, 'not-valid-uuid3'));
+	});
+
+	it("should not pass undefined", function (done) {
+	    validator.validate(undefined, common.checkValidation(done, 'not-valid-uuid3'));
+	});
+
+	it("should pass null with .ifDefined()", function (done) {
+	    validator.ifDefined().validate(null, common.checkValidation(done));
+	});
+
+	it("should pass undefined with .ifDefined()", function (done) {
+	    validator.ifDefined().validate(undefined, common.checkValidation(done));
+	});
+
+	describe("with custom error", function () {
+		var validator = enforce.patterns.uuid3('custom-error');
+
+		it("should not pass '6ba7b810-9dad-11d1-80b4-00c04fd430c8' with 'custom-error'", function (done) {
+			validator.validate('6ba7b810-9dad-11d1-80b4-00c04fd430c8', common.checkValidation(done, 'custom-error'));
+		});
+	});
+});
+
+describe("enforce.patterns.uuid4()", function () {
+	var validator = enforce.patterns.uuid4();
+
+	it("should pass '6ba7b810-9dad-41d1-80b4-00c04fd430c8'", function (done) {
+		validator.validate('6ba7b810-9dad-41d1-80b4-00c04fd430c8', common.checkValidation(done));
+	});
+
+	it("should not pass '6ba7b810-9dad-11d1-80b4-00c04fd430c8'", function (done) {
+		validator.validate('6ba7b810-9dad-11d1-80b4-00c04fd430c8', common.checkValidation(done, 'not-valid-uuid4'));
+	});
+
+	it("should not pass '6ba7b810-9dad-31d1-70b4-00c04fd430c8'", function (done) {
+		validator.validate('6ba7b810-9dad-31d1-70b4-00c04fd430c8', common.checkValidation(done, 'not-valid-uuid4'));
+	});
+
+	it("should not pass null", function (done) {
+	    validator.validate(null, common.checkValidation(done, 'not-valid-uuid4'));
+	});
+
+	it("should not pass undefined", function (done) {
+	    validator.validate(undefined, common.checkValidation(done, 'not-valid-uuid4'));
+	});
+
+	it("should pass null with .ifDefined()", function (done) {
+	    validator.ifDefined().validate(null, common.checkValidation(done));
+	});
+
+	it("should pass undefined with .ifDefined()", function (done) {
+	    validator.ifDefined().validate(undefined, common.checkValidation(done));
+	});
+
+	describe("with custom error", function () {
+		var validator = enforce.patterns.uuid4('custom-error');
+
+		it("should not pass '6ba7b810-9dad-11d1-80b4-00c04fd430c8' with 'custom-error'", function (done) {
+			validator.validate('6ba7b810-9dad-11d1-80b4-00c04fd430c8', common.checkValidation(done, 'custom-error'));
+		});
+	});
+});

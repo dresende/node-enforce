@@ -61,3 +61,19 @@ export function mac(message: string = 'not-valid-mac'): enforce.IValidator {
     var s = "[\\.:]";
     return match("^" + [p, p, p, p, p, p].join(s) + "$", "i", message);
 }
+
+/**
+ * Check if it's a valid UUID version 3 (MD5 hash).
+ * http://en.wikipedia.org/wiki/Universally_unique_identifier#Version_3_.28MD5_hash.29
+ **/
+export function uuid3(message: string = 'not-valid-uuid3'): enforce.IValidator {
+    return exports.match("^[a-f0-9]{8}\-[a-f0-9]{4}\-3[a-f0-9]{3}\-[89ab][a-f0-9]{3}\-[a-f0-9]{12}$", "i", message);
+}
+
+/**
+ * Check if it's a valid UUID version 4 (random).
+ * http://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_.28random.29
+ **/
+export function uuid4(message: string = 'not-valid-uuid3'): enforce.IValidator {
+    return exports.match("^[a-f0-9]{8}\-[a-f0-9]{4}\-4[a-f0-9]{3}\-[89ab][a-f0-9]{3}\-[a-f0-9]{12}$", "i", message);
+}
