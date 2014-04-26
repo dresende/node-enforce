@@ -5,11 +5,11 @@
 import Validator = require('../validator');
 
 /**
-    * Check if a value matches a given pattern.
-    * You can define a pattern string and regex
-    * modifiers or just send the RegExp object
-    * as 1st argument.
-    **/
+ * Check if a value matches a given pattern.
+ * You can define a pattern string and regex
+ * modifiers or just send the RegExp object
+ * as 1st argument.
+ **/
 export function match(pattern: RegExp, message?: string): enforce.IValidator;
 export function match(pattern: string, modifiers?: string, message?: string): enforce.IValidator;
 export function match(pattern: any, modifiers: string = 'i', message: string = 'no-pattern-match'): enforce.IValidator {
@@ -29,26 +29,35 @@ export function match(pattern: any, modifiers: string = 'i', message: string = '
 }
 
 /**
-    * Check if a value is an hexadecimal string
-    * (letters from A to F and numbers).
-    **/
+ * Check if a value is an hexadecimal string
+ * (letters from A to F and numbers).
+ **/
 export function hexString(message: string = 'not-hex-string'): enforce.IValidator {
     return match("^[a-f0-9]+$", "i", message);
 }
 
 /**
-    * Check if a value is an e-mail address
-    * (simple checking, works 99%).
-    **/
+ * Check if a value is an e-mail address
+ * (simple checking, works 99%).
+ **/
 export function email(message: string = 'not-valid-email') {
     return match("^[a-z0-9\\._%\\+\\-]+@[a-z0-9\\.\\-]+\\.[a-z]{2,6}$", "i", message);
 }
 
 /**
-    * Check if it's a valid IPv4 address.
-    **/
+ * Check if it's a valid IPv4 address.
+ **/
 export function ipv4(message: string = 'not-valid-ipv4'): enforce.IValidator {
     var p1 = "([1-9]|1[0-9][0-9]?|2[0-4][0-9]|25[0-4])";
     var p2 = "([0-9]|1[0-9][0-9]?|2[0-4][0-9]|25[0-4])";
     return match("^" + [p1, p2, p2, p1].join("\\.") + "$", "", message);
+}
+
+/**
+ * Check if it's a valid MAC address.
+ **/
+export function mac(message: string = 'not-valid-mac'): enforce.IValidator {
+    var p = "[0-9a-f]{1,2}";
+    var s = "[\\.:]";
+    return match("^" + [p, p, p, p, p, p].join(s) + "$", "i", message);
 }

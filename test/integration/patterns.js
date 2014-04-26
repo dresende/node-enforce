@@ -182,3 +182,55 @@ describe("enforce.patterns.ipv4()", function () {
 		});
 	});
 });
+
+describe("enforce.patterns.mac()", function () {
+	var validator = enforce.patterns.mac();
+
+	it("should pass '0.1.2.3.4.5'", function (done) {
+		validator.validate('0.1.2.3.4.5', common.checkValidation(done));
+	});
+
+	it("should pass '01:23:45:67:89:aB'", function (done) {
+		validator.validate('01:23:45:67:89:ab', common.checkValidation(done));
+	});
+
+	it("should pass '00:1:22:3:44:5'", function (done) {
+		validator.validate('00:1:22:3:44:5', common.checkValidation(done));
+	});
+
+	it("should not pass '000:11:22:33:44:55'", function (done) {
+		validator.validate('000:11:22:33:44:55', common.checkValidation(done, 'not-valid-mac'));
+	});
+
+	it("should not pass 'aa:bb:dd:ee:ff:gg'", function (done) {
+		validator.validate('aa:bb:dd:ee:ff:gg', common.checkValidation(done, 'not-valid-mac'));
+	});
+
+	it("should not pass 'aa:bb::cc:dd:ee'", function (done) {
+		validator.validate('aa:bb::cc:dd:ee', common.checkValidation(done, 'not-valid-mac'));
+	});
+
+	it("should not pass null", function (done) {
+	    validator.validate(null, common.checkValidation(done, 'not-valid-mac'));
+	});
+
+	it("should not pass undefined", function (done) {
+	    validator.validate(undefined, common.checkValidation(done, 'not-valid-mac'));
+	});
+
+	it("should pass null with .ifDefined()", function (done) {
+	    validator.ifDefined().validate(null, common.checkValidation(done));
+	});
+
+	it("should pass undefined with .ifDefined()", function (done) {
+	    validator.ifDefined().validate(undefined, common.checkValidation(done));
+	});
+
+	describe("with custom error", function () {
+		var validator = enforce.patterns.mac('custom-error');
+
+		it("should not pass '0.1.2.3' with 'custom-error'", function (done) {
+			validator.validate('0.1.2.3', common.checkValidation(done, 'custom-error'));
+		});
+	});
+});
