@@ -68,6 +68,12 @@ Checks if a property is not `null` and not `undefined`. If can be `false`, `0` o
 
 Checks if a property length is not zero. It can actually work with `Array`s.
 
+### Same as
+
+`enforce.sameAs(property, [ msg ])`
+
+Checks if a property has the same (strict) value as another one. This is usefull for testing password matching.
+
 ### Lists
 
 #### Inside a list
@@ -159,6 +165,24 @@ Checks if a property matches a predefined `RegExp` object accepting valid e-mail
 `enforce.patterns.ipv4([ msg ])`
 
 Checks if a property matches a predefined `RegExp` object accepting valid IPv4 address.
+
+#### MAC
+
+`enforce.patterns.mac([ msg ])`
+
+Checks if a property matches a predefined `RegExp` object accepting valid MAC address.
+
+#### UUID v3
+
+`enforce.patterns.uuid3([ msg ])`
+
+Checks if a property matches a predefined `RegExp` object accepting valid UUID version 3.
+
+#### UUID v4
+
+`enforce.patterns.uuid4([ msg ])`
+
+Checks if a property matches a predefined `RegExp` object accepting valid UUID version 4.
 
 ## Chaining
 `Enforce` supports chaining operations on all `Validator` objects, these allow you to add additional common
