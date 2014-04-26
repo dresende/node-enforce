@@ -54,6 +54,41 @@ export function ipv4(message: string = 'not-valid-ipv4'): enforce.IValidator {
 }
 
 /**
+ * Check if it's a valid IPv6 address.
+ **/
+export function ipv6(message: string = 'not-valid-ipv6'): enforce.IValidator {
+    var p1 = new RegExp("^([a-f0-9]{1,4}:){7}[a-f0-9]{1,4}$", "i");
+    var p2 = new RegExp("^([a-f0-9]{1,4}:)*[a-f0-9]{1,4}$", "i");
+
+    return new Validator(function (value, next) {
+        if (typeof value != "string") {
+            return next(message);
+        }
+        // unspecified / loopback
+        if ([ "::", "::1" ].indexOf(value) >= 0) {
+            return next();
+        }
+        // normal address (with possible leading zeroes omitted)
+        if (value.match(p1)) {
+            return next();
+        }
+        if (value.indexOf("::") == -1) {
+            return next(message);
+        }
+        // grouping zeroes
+        var g = value.split("::");
+
+        if (g.length != 2) {
+            return next(message);
+        }
+        if (!g[0].match(p2) || !g[1].match(p2)) {
+            return next(message);
+        }
+        return next();
+    });
+}
+
+/**
  * Check if it's a valid MAC address.
  **/
 export function mac(message: string = 'not-valid-mac'): enforce.IValidator {

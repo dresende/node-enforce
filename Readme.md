@@ -166,6 +166,12 @@ Checks if a property matches a predefined `RegExp` object accepting valid e-mail
 
 Checks if a property matches a predefined `RegExp` object accepting valid IPv4 address.
 
+#### IPv6
+
+`enforce.patterns.ipv6([ msg ])`
+
+Checks if a property matches a predefined `RegExp` object accepting valid IPv6 address.
+
 #### MAC
 
 `enforce.patterns.mac([ msg ])`

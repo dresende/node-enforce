@@ -23,6 +23,11 @@ describe("enforce.patterns", function () {
 
 		return done();
 	});
+	it("should have .ipv6()", function (done) {
+		enforce.patterns.ipv4.should.be.a("function");
+
+		return done();
+	});
 
 	describe("with custom error", function () {
 	    it("should fail 'abc' on /def/ with 'invalid'", function (done) {
@@ -176,6 +181,66 @@ describe("enforce.patterns.ipv4()", function () {
 
 	describe("with custom error", function () {
 		var validator = enforce.patterns.ipv4('custom-error');
+
+		it("should not pass '0.1.2.3' with 'custom-error'", function (done) {
+			validator.validate('0.1.2.3', common.checkValidation(done, 'custom-error'));
+		});
+	});
+});
+
+describe("enforce.patterns.ipv6()", function () {
+	var validator = enforce.patterns.ipv6();
+
+	it("should pass '2001:0db8:85a3:0000:0000:8a2e:0370:7334'", function (done) {
+		validator.validate('2001:0db8:85a3:0000:0000:8a2e:0370:7334', common.checkValidation(done));
+	});
+
+	it("should pass '2001:db8:85a3:0:0:8a2e:370:7334'", function (done) {
+		validator.validate('2001:db8:85a3:0:0:8a2e:370:7334', common.checkValidation(done));
+	});
+
+	it("should pass '2001:db8:85a3::8a2e:370:7334'", function (done) {
+		validator.validate('2001:db8:85a3::8a2e:370:7334', common.checkValidation(done));
+	});
+
+	it("should pass '::'", function (done) {
+		validator.validate('::', common.checkValidation(done));
+	});
+
+	it("should pass '::1'", function (done) {
+		validator.validate('::1', common.checkValidation(done));
+	});
+
+	it("should not pass '::0'", function (done) {
+		validator.validate('::0', common.checkValidation(done, 'not-valid-ipv6'));
+	});
+
+	it("should not pass '2001:db8:85a3:8d3:1319:8a2e:370'", function (done) {
+		validator.validate('2001:db8:85a3:8d3:1319:8a2e:370', common.checkValidation(done, 'not-valid-ipv6'));
+	});
+
+	it("should not pass '2001:db8::8d3::8a2e:370:7348'", function (done) {
+		validator.validate('2001:db8::8d3::8a2e:370:7348', common.checkValidation(done, 'not-valid-ipv6'));
+	});
+
+	it("should not pass null", function (done) {
+	    validator.validate(null, common.checkValidation(done, 'not-valid-ipv6'));
+	});
+
+	it("should not pass undefined", function (done) {
+	    validator.validate(undefined, common.checkValidation(done, 'not-valid-ipv6'));
+	});
+
+	it("should pass null with .ifDefined()", function (done) {
+	    validator.ifDefined().validate(null, common.checkValidation(done));
+	});
+
+	it("should pass undefined with .ifDefined()", function (done) {
+	    validator.ifDefined().validate(undefined, common.checkValidation(done));
+	});
+
+	describe("with custom error", function () {
+		var validator = enforce.patterns.ipv6('custom-error');
 
 		it("should not pass '0.1.2.3' with 'custom-error'", function (done) {
 			validator.validate('0.1.2.3', common.checkValidation(done, 'custom-error'));
