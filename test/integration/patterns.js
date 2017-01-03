@@ -110,6 +110,14 @@ describe("enforce.patterns.email()", function () {
 		validator.validate('disposable.style.email.with+symbol@example.com', common.checkValidation(done));
 	});
 
+	it("should pass 'long.tld.upto.63.char@example.abcdefghabcdefghabcdefghabcdefghabcdefghabcdefghabcdefghabcdefg'", function (done) {
+		validator.validate('long.tld.upto.63.char@example.abcdefghabcdefghabcdefghabcdefghabcdefghabcdefghabcdefghabcdefg', common.checkValidation(done));
+	});
+
+	it("should not pass 'long.tld.over.63.char@example.abcdefghabcdefghabcdefghabcdefghabcdefghabcdefghabcdefghabcdefgh'", function (done) {
+		validator.validate('long.tld.over.63.char@example.abcdefghabcdefghabcdefghabcdefghabcdefghabcdefghabcdefghabcdefgh', common.checkValidation(done, 'not-valid-email'));
+	});
+
 	it("should not pass 'Abc.example.com'", function (done) {
 		validator.validate('Abc.example.com', common.checkValidation(done, 'not-valid-email'));
 	});
