@@ -10,7 +10,7 @@
 		"validation",
 		"manipulation"
 	],
-	"version"     : "0.1.6",
+	"version"     : "0.1.7",
 	"license"     : "MIT",
 	"repository"  : "http://github.com/dresende/node-enforce.git",
 	"scripts"     : {
