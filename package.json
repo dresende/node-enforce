@@ -23,7 +23,7 @@
 	"analyse"     : false,
 	"devDependencies": {
 		"mocha"      : "^10.4.0",
-		"should"     : "1.2.2",
+		"should"     : "^13.2.3",
 		"typescript" : ">= 0.9.1"
 	}
 }
