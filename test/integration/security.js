@@ -4,7 +4,7 @@ var enforce = require("../..");
 
 describe("enforce.security", function () {
 	it("should have .password()", function (done) {
-		enforce.security.password.should.be.a("function");
+		enforce.security.password.should.be.of.type("function");
 
 		return done();
 	});

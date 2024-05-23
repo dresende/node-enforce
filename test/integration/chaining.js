@@ -6,22 +6,22 @@ describe("chaining", function () {
     var validator = enforce.patterns.match(/test/, 'invalid');
 
     it("should have .ifDefined()", function (done) {
-        validator.ifDefined.should.be.a("function");
+        validator.ifDefined.should.be.of.type("function");
 
 		return done();
     });
     it("should have .ifNotEmptyString()", function (done) {
-        validator.ifNotEmptyString.should.be.a("function");
+        validator.ifNotEmptyString.should.be.of.type("function");
 
         return done();
     });
     it("should have .ifType()", function (done) {
-        validator.ifType.should.be.a("function");
+        validator.ifType.should.be.of.type("function");
 
         return done();
     });
     it("should have .ifNotType()", function (done) {
-        validator.ifNotType.should.be.a("function");
+        validator.ifNotType.should.be.of.type("function");
 
         return done();
     });

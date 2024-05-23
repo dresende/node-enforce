@@ -4,15 +4,15 @@ var enforce = require("../..");
 
 describe("enforce.Enforce", function () {
 	it("should be a function", function (done) {
-		enforce.Enforce.should.be.a("function");
+		enforce.Enforce.should.be.of.type("function");
 
 		return done();
 	});
 	it("should create an object with .add() and .check()", function (done) {
 		var checks = new enforce.Enforce();
 
-		checks.add.should.be.a("function");
-		checks.check.should.be.a("function");
+		checks.add.should.be.of.type("function");
+		checks.check.should.be.of.type("function");
 
 		return done();
 	});
@@ -38,7 +38,7 @@ describe("new enforce.Enforce()", function () {
 	    var checks = new enforce.Enforce();
 
 	    it("should have the .add() method", function (done) {
-	        checks.add.should.be.a('function');
+	        checks.add.should.be.of.type('function');
 	        done();
 	    });
 
@@ -83,7 +83,7 @@ describe("new enforce.Enforce()", function () {
 	    var checks = new enforce.Enforce();
 
 	    it("should have a .clear() method", function (done) {
-	        checks.clear.should.be.a("function");
+	        checks.clear.should.be.of.type("function");
 	        done();
 	    });
 

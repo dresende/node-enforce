@@ -4,22 +4,22 @@ var enforce = require("../..");
 
 describe("enforce", function () {
 	it("should have .required()", function (done) {
-		enforce.required.should.be.a("function");
+		enforce.required.should.be.of.type("function");
 
 		return done();
 	});
 	it("should have .notEmptyString()", function (done) {
-		enforce.notEmptyString.should.be.a("function");
+		enforce.notEmptyString.should.be.of.type("function");
 
 		return done();
 	});
 	it("should have .sameAs()", function (done) {
-		enforce.sameAs.should.be.a("function");
+		enforce.sameAs.should.be.of.type("function");
 
 		return done();
 	});
 	it("should have a chainable .ifDefined() function", function (done) {
-	    enforce.required().ifDefined.should.be.a("function");
+	    enforce.required().ifDefined.should.be.of.type("function");
 
 	    return done();
 	});

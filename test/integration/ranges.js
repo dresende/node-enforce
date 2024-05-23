@@ -4,12 +4,12 @@ var enforce = require("../..");
 
 describe("enforce.ranges", function () {
 	it("should have .number()", function (done) {
-		enforce.ranges.number.should.be.a("function");
+		enforce.ranges.number.should.be.of.type("function");
 
 		return done();
 	});
 	it("should have .length()", function (done) {
-		enforce.ranges.length.should.be.a("function");
+		enforce.ranges.length.should.be.of.type("function");
 
 		return done();
 	});

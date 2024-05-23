@@ -4,12 +4,12 @@ var enforce = require("../..");
 
 describe("enforce.lists", function () {
 	it("should have .inside()", function (done) {
-		enforce.lists.inside.should.be.a("function");
+		enforce.lists.inside.should.be.of.type("function");
 
 		return done();
 	});
 	it("should have .outside()", function (done) {
-		enforce.lists.outside.should.be.a("function");
+		enforce.lists.outside.should.be.of.type("function");
 
 		return done();
 	});

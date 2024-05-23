@@ -4,42 +4,42 @@ var enforce = require("../..");
 
 describe("enforce.patterns", function () {
 	it("should have .match()", function (done) {
-		enforce.patterns.match.should.be.a("function");
+		enforce.patterns.match.should.be.of.type("function");
 
 		return done();
 	});
 	it("should have .hexString()", function (done) {
-		enforce.patterns.hexString.should.be.a("function");
+		enforce.patterns.hexString.should.be.of.type("function");
 
 		return done();
 	});
 	it("should have .email()", function (done) {
-		enforce.patterns.email.should.be.a("function");
+		enforce.patterns.email.should.be.of.type("function");
 
 		return done();
 	});
 	it("should have .ipv4()", function (done) {
-		enforce.patterns.ipv4.should.be.a("function");
+		enforce.patterns.ipv4.should.be.of.type("function");
 
 		return done();
 	});
 	it("should have .ipv6()", function (done) {
-		enforce.patterns.ipv6.should.be.a("function");
+		enforce.patterns.ipv6.should.be.of.type("function");
 
 		return done();
 	});
 	it("should have .mac()", function (done) {
-		enforce.patterns.mac.should.be.a("function");
+		enforce.patterns.mac.should.be.of.type("function");
 
 		return done();
 	});
 	it("should have .uuid3()", function (done) {
-		enforce.patterns.uuid3.should.be.a("function");
+		enforce.patterns.uuid3.should.be.of.type("function");
 
 		return done();
 	});
 	it("should have .uuid4()", function (done) {
-		enforce.patterns.uuid4.should.be.a("function");
+		enforce.patterns.uuid4.should.be.of.type("function");
 
 		return done();
 	});
